@@ -2,7 +2,7 @@
 
 Independent documentation of observed behavioral incidents for the **`thinkingmachines/inkling-2-mini`** model, accessed via the **OpenRouter** provider.
 
-This repository records reproducible observations, diagnostic artifacts, and analysis for two distinct failure modes encountered during agentic tool-use sessions in Visual Studio Code (Copilot CLI).
+This repository records reproducible observations, diagnostic artifacts, and analysis for three distinct failure modes encountered during agentic tool-use sessions in Visual Studio Code (Copilot CLI).
 
 ---
 
@@ -12,6 +12,7 @@ This repository records reproducible observations, diagnostic artifacts, and ana
 |----|------|-------|----------|--------|
 | INC-2026-11-24-001 | 2026-11-24 | Runaway Tool-Call Loop (Reward Hacking) | High | [report.md](incidents/2026-11-incident-01/report.md) |
 | INC-2026-11-24-002 | 2026-11-24 | Premature Turn Termination | Medium | [report.md](incidents/2026-11-incident-02/report.md) |
+| INC-2026-11-24-003 | 2026-11-24 | Repeated Identical Tool-Call Loop (Investigation Session) | High | [report.md](incidents/2026-11-incident-03/report.md) |
 
 ---
 
@@ -50,6 +51,11 @@ inkling-2-mini-openrouter-incidents/
 │       └── attachments/
 │           ├── turn-termination-stats.js
 │           └── turn-content.js
+├── 2026-11-incident-03/          # Repeated identical tool-call loop
+│   ├── report.md
+│   └── attachments/
+│       ├── incident-stats.js
+│       └── repeated-output-check.js
 └── shared/
     └── environment-notes.md
 ```
