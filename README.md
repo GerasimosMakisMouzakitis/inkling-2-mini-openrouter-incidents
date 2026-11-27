@@ -57,7 +57,9 @@ inkling-2-mini-openrouter-incidents/
 │       ├── incident-stats.js
 │       └── repeated-output-check.js
 └── shared/
-    └── environment-notes.md
+    ├── environment-notes.md
+    ├── screenshot_2026-11-26_222011.png   # OpenRouter Total Usage ($) — 24 Nov 2026
+    └── screenshot_2026-11-26_222200.png   # OpenRouter Tokens (Total) — 24 Nov 2026
 ```
 
 ---
@@ -76,6 +78,14 @@ All reports and attachments have been reviewed for sensitive data:
 ## License
 
 See [LICENSE](LICENSE).
+
+---
+
+## Disclaimer
+
+This repository documents independent, observational findings about the behavior of the `thinkingmachines/inkling-2-mini` model accessed via OpenRouter. The reports reflect the researcher's own sessions and are provided **as-is**, without warranty of any kind. They are not affiliated with, endorsed by, or an official position of Thinking Machines, OpenRouter, Microsoft, or VS Code. Token counts and cost estimates are approximate and depend on the provider and pricing tier that served each request. This material is shared for diagnostic and research purposes only.
+
+The content of the reports was read and checked by the author, **Gerasimos Makis Mouzakitis**, but **may still contain errors**; it has **not** been independently reviewed or verified by a third party. The reports were drafted in collaboration between the author and the LLM model **ERNIE-5.5-Flash-Preview-Free** (both accessed via OpenRouter).
 
 ---
 

@@ -165,7 +165,7 @@ As LLM-based agents are deployed for autonomous multi-step work, reliable tool c
 | Resource | Impact |
 |----------|--------|
 | **Compute (model provider)** | ~59M unnecessary input tokens consumed |
-| **Financial** | API costs accumulate per call (even free-tier models represent opportunity cost) |
+| **Financial** | API costs accumulate per call — Inkling-2-Mini is a **paid** model on OpenRouter (from ~$0.02625/M input, ~$0.105/M output on Darkbloom up to ~$0.15/M input, ~$0.60/M output on Prime Intellect), so the wasted calls carry a real monetary cost. |
 | **User time** | ~1 hour 50 minutes of unproductive session time |
 | **Context window** | Wasted tokens fill the context window, degrading performance |
 
@@ -281,7 +281,34 @@ The third incident is the most severe in terms of token waste (59M vs 44M) and a
 | **Token Waste** | ~59 million input tokens consumed without progress |
 | **Task Completion** | The investigation session could not complete the incident report |
 | **User Experience** | ~1 hour 50 minutes of unproductive session time |
-| **Cost** | No direct cost (OpenRouter free tier), but significant compute waste |
+| **Cost** | Direct financial cost on OpenRouter paid tiers (Inkling-2-Mini is **not** free — see §8.1); ~59.2M wasted input tokens |
+
+### 8.1 Cost of the Wasted Tokens (OpenRouter paid tiers)
+
+Inkling-2-Mini is **not** a free-tier model on OpenRouter. The standard-variant pay-as-you-go prices (USD per 1M tokens) across providers are:
+
+| Provider | Input $/M | Output $/M |
+|----------|-----------|------------|
+| Darkbloom | $0.02625 | $0.105 |
+| Prime Intellect | $0.0375 | $0.15 |
+| DeepInfra | $0.075 | $0.30 |
+| Prime Intellect | $0.075 | $0.30 |
+| io.net | $0.12 | $0.50 |
+| Prime Intellect | $0.15 | $0.60 |
+
+Applying these prices to this incident's **59,160,191 input / 71,862 output** wasted tokens:
+
+| Provider | Estimated cost (USD) |
+|----------|----------------------|
+| Darkbloom | ~$1.56 |
+| Prime Intellect ($0.0375) | ~$2.23 |
+| DeepInfra / Prime Intellect ($0.075) | ~$4.46 |
+| io.net | ~$7.14 |
+| Prime Intellect ($0.15) | ~$8.92 |
+
+So the repeated-output loop cost roughly **$1.6–$8.9** depending on the provider that served the requests — a real, non-zero financial cost in addition to the wasted time and compute. (Source: [OpenRouter model page](https://openrouter.ai/thinkingmachines/inkling-2-mini).)
+
+This is corroborated by the OpenRouter Activity dashboard for **24 Nov 2026**, which shows non-zero hourly **Total Usage ($)** and **Tokens (Total)** bars for `Inkling 2 Mini` (see `shared/screenshot_2026-11-26_222011.png` and `shared/screenshot_2026-11-26_222200.png`). The paid, metered usage recorded there is direct evidence that the model is not free-tier and that these wasted tokens incurred real cost.
 
 ---
 

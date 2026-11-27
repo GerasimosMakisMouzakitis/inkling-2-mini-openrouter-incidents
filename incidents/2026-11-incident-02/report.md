@@ -166,9 +166,26 @@ As LLM-based agents are deployed for autonomous multi-step work, reliable tool c
 | Resource | Impact |
 |----------|--------|
 | **User time** | Each premature stop requires human intervention to continue |
-| **Token cost** | Each stop consumes a full input context (70K–140K tokens) for a minimal output |
+| **Token cost** | Each stop consumes a full input context (70K–140K tokens) for a minimal output — a real financial cost, since Inkling-2-Mini is a **paid** model on OpenRouter (see §4.1) |
 | **Task latency** | Tasks take multiples of the ideal number of turns |
 | **Compute** | Repeated context re-submission wastes inference cycles |
+
+### 0.9 Cost of the Wasted Tokens (OpenRouter paid tiers)
+
+Inkling-2-Mini is **not** a free-tier model on OpenRouter. The standard-variant pay-as-you-go prices (USD per 1M tokens) across providers are:
+
+| Provider | Input $/M | Output $/M |
+|----------|-----------|------------|
+| Darkbloom | $0.02625 | $0.105 |
+| Prime Intellect | $0.0375 | $0.15 |
+| DeepInfra | $0.075 | $0.30 |
+| Prime Intellect | $0.075 | $0.30 |
+| io.net | $0.12 | $0.50 |
+| Prime Intellect | $0.15 | $0.60 |
+
+Each premature stop re-submits a 70K–140K-token context for a ~100–500-token output. At the cheapest tier (Darkbloom, $0.02625/M input) a single 100K-token re-submission costs ~$0.0026; at the most expensive tier (Prime Intellect, $0.15/M input) it costs ~$0.015. Across the ~9 documented interventions (plus every additional premature stop that re-submitted the full context), the wasted re-submissions add up to a **real, non-zero financial cost** on top of the wasted user time. (Source: [OpenRouter model page](https://openrouter.ai/thinkingmachines/inkling-2-mini).)
+
+This is corroborated by the OpenRouter Activity dashboard for **24 Nov 2026**, which shows non-zero hourly **Total Usage ($)** and **Tokens (Total)** bars for `Inkling 2 Mini` (see `shared/screenshot_2026-11-26_222011.png` and `shared/screenshot_2026-11-26_222200.png`). The paid, metered usage recorded there is direct evidence that the model is not free-tier and that these wasted tokens incurred real cost.
 
 ---
 
@@ -253,7 +270,24 @@ This confirms the runtime itself detected an incomplete response.
 | **User time** | ~9 documented interventions, with 3–13 minute gaps each |
 | **Task latency** | Tasks took multiples of the ideal number of turns |
 | **User experience** | The user had to babysit the agent, defeating the purpose of autonomous operation |
-| **Token cost** | Each premature stop still consumed a full input context (70K–140K tokens) for a ~100–500 token output |
+| **Token cost** | Each premature stop still consumed a full input context (70K–140K tokens) for a ~100–500 token output — a real financial cost on the paid OpenRouter tiers (see §4.1) |
+
+### 4.1 Cost of the Wasted Tokens (OpenRouter paid tiers)
+
+Inkling-2-Mini is **not** a free-tier model on OpenRouter. The standard-variant pay-as-you-go prices (USD per 1M tokens) across providers are:
+
+| Provider | Input $/M | Output $/M |
+|----------|-----------|------------|
+| Darkbloom | $0.02625 | $0.105 |
+| Prime Intellect | $0.0375 | $0.15 |
+| DeepInfra | $0.075 | $0.30 |
+| Prime Intellect | $0.075 | $0.30 |
+| io.net | $0.12 | $0.50 |
+| Prime Intellect | $0.15 | $0.60 |
+
+Each premature stop re-submits a 70K–140K-token context for a ~100–500-token output. At the cheapest tier (Darkbloom, $0.02625/M input) a single 100K-token re-submission costs ~$0.0026; at the most expensive tier (Prime Intellect, $0.15/M input) it costs ~$0.015. Across the ~9 documented interventions (plus every additional premature stop that re-submitted the full context), the wasted re-submissions add up to a **real, non-zero financial cost** on top of the wasted user time. (Source: [OpenRouter model page](https://openrouter.ai/thinkingmachines/inkling-2-mini).)
+
+This is corroborated by the OpenRouter Activity dashboard for **24 Nov 2026**, which shows non-zero hourly **Total Usage ($)** and **Tokens (Total)** bars for `Inkling 2 Mini` (see `shared/screenshot_2026-11-26_222011.png` and `shared/screenshot_2026-11-26_222200.png`). The paid, metered usage recorded there is direct evidence that the model is not free-tier and that these wasted tokens incurred real cost.
 
 ---
 

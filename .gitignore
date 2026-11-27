@@ -1,4 +1,4 @@
-# Backup files
+# Backup files (3-backup rotation: .bak, .bak2, .bak3)
 *.bak
 *.bak.*
 
@@ -12,3 +12,9 @@ Thumbs.db
 
 # Node
 node_modules/
+
+# Extracted recommendations (gitignored)
+recommendations.md
+
+# Personal todo file (not for git)
+todo.txt
